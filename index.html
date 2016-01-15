@@ -41,15 +41,17 @@
     <div class="slides">
       <section>
         <h2>Provisionando...ando</h2>
-        <h4>O "Como puedo desplegar mi infraestructura virtual con el mínimo calentamiento de cabeza"</h4>
-        <p>
-          <font size="6">
-            Germán Martínez Maldonado (<a href="https://github.com/germaaan">@germaaan</a> \ <a href="https://twitter.com/germaaan_">@germaaan</a>)
-            <br> Oficina de Software Libre de la Universidad de Granada (<a href="https://twitter.com/OSLUGR">@OSLUGR</a> / <a href="https://www.facebook.com/SoftwareLibreUGR">@SoftwareLibreUGR</a> \ )
+        <h4>O "Como puedo desplegar mi infraestructura virtual con el mínimo calentamiento de cabeza" (en teoría)</h4>
+        <p style="line-height: 43%">
+          <font size="4">
+            Germán Martínez Maldonado
+            <br> (
+            <a href="https://github.com/germaaan">@germaaan</a> / <a href="https://twitter.com/germaaan_">@germaaan_</a>)
+            <br height:>Oficina de Software Libre de la Universidad de Granada
+            <br>(<a href="https://twitter.com/OSLUGR">@OSLUGR</a> / <a href="https://www.facebook.com/SoftwareLibreUGR">@SoftwareLibreUGR</a>)
           </font>
           <br>
-          <br>
-          <small><a href="https://creativecommons.org/licenses/by-sa/4.0/"> CC-BY-SA 4.0 </a></small>
+          <img alt="image" src="images/osl.png" height="300" />
           <br>
           <img alt="image" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
         </p>
@@ -58,12 +60,56 @@
       <section>
         <section>
           <h2>Mi infraestructura virtual, mi tesoro</h2>
-          <img alt="image" src="images/webservice.png" />
+          <img alt="image" src="images/webservice.png" height="550" />
         </section>
         <section>
           <h2>Y tú, ¿de cuál eres?</h2>
-          <img alt="image" src="images/tux_machete.png" width="45%"/>
-          <img alt="image" src="images/tux_matrix.png" width="45%"/>
+          <img alt="image" src="images/tux_machete.png" width="45%" />
+          <img alt="image" src="images/tux_matrix.png" width="45%" />
+        </section>
+        <section>
+          <h2>Vale, pero perder horas configurando servidores... ¿es que no lo puede hacer otro?</h2>
+          <p class="fragment">
+            <img alt="image" src="images/homer_ansible.png" width="55%" /> </p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Ansible</h2>
+          <img alt="image" src="images/ansible.png" height="100" />
+          <p>
+            Ansible es un motor de orquestación, una herramienta que nos permite aplicar configuraciones en infraestructuras remotas de forma automática.
+          </p>
+        </section>
+        <section>
+          <img alt="image" src="images/boromir.png" height="100%" />
+        </section>
+        <section>
+          <h2> Provisionar un servidor </h2>
+          <ul>
+            <li> Seleccionar la máquina </li>
+            <li> Instalar el software necesario </li>
+            <li> Configurar el sistema </li>
+            <li> Desplegar el software propio </li>
+          </ul>
+        </section>
+        <section>
+          <h2> ¿Así que Ansible hace todo por mi? </h2>
+          <p class="fragment">
+          <img alt="image" src="images/dicaprio.png" height="100%" />
+        </p>
+        </section>
+        <section>
+          <h2>  Características de Ansible </h2>
+        </section>
+
+        <section>
+          <h2>  ¿Pero es que solo existe Ansible para provisionar? </h2>
+          <p class="fragment">
+            No, pero es el más comodo
+          </p>
+            <!-- Puedes usar chef o puppet, pero necesitas instalar un agente y además la configuración es más complicada para hacer exactamente lo mismo, Configuración de Chef y Puppet-->
         </section>
       </section>
 
