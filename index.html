@@ -41,7 +41,7 @@
     <div class="slides">
       <section>
         <h2>Provisionando...ando</h2>
-        <h4>O "Como puedo desplegar mi infraestructura virtual con el mínimo calentamiento de cabeza" (en teoría)</h4>
+        <h4>"Como desplegar mi infraestructura virtual con el mínimo calentamiento de cabeza"</h4>
         <p style="line-height: 43%">
           <font size="4">
             Germán Martínez Maldonado
@@ -77,7 +77,7 @@
       <section>
         <section>
           <h2>Ansible</h2>
-          <img alt="image" src="images/ansible.png" height="100" />
+          <img alt="image" src="images/ansible.png" height="200" />
           <p>
             Ansible es un motor de orquestación, una herramienta que nos permite aplicar configuraciones en infraestructuras remotas de forma automática.
           </p>
@@ -97,21 +97,289 @@
         <section>
           <h2> ¿Así que Ansible hace todo por mi? </h2>
           <p class="fragment">
-          <img alt="image" src="images/dicaprio.png" height="100%" />
-        </p>
+            <img alt="image" src="images/dicaprio.png" height="100%" />
+          </p>
         </section>
         <section>
-          <h2>  Características de Ansible </h2>
+          <h2> Características de Ansible </h2>
+          <ul>
+            <li> Creado en 2012 </li>
+            <li> Desarrollado en Python </li>
+            <li> Configuración de tareas mediante YAML (
+              <strong>Playbook</strong>) </li>
+            <li> Método de autenticación por ssh </li>
+            <li> No necesita usuario root </li>
+          </ul>
         </section>
 
         <section>
-          <h2>  ¿Pero es que solo existe Ansible para provisionar? </h2>
+          <h2> ¿Pero es que solo existe Ansible para provisionar? </h2>
           <p class="fragment">
             No, pero es el más comodo
           </p>
-            <!-- Puedes usar chef o puppet, pero necesitas instalar un agente y además la configuración es más complicada para hacer exactamente lo mismo, Configuración de Chef y Puppet-->
+        </section>
+        <section>
+          <h2> Chef / Puppet </h2>
+          <img alt="image" src="images/chef.png" height="200" />
+          <img alt="image" src="images/puppet.png" height="200" />
+          <ul>
+            <li> Necesitan de un agente instalado en el objetivo </li>
+            <li> Configuración más complicada </li>
+            <li> Modo pull / modo push </li>
+          </ul>
+        </section>
+        <section>
+          <h2> Vale, empiezo a entender el asunto, ¿pero dónde puedo usarlo? </h2>
+          <p class="fragment"> En cualquier sitio: </p>
+          <ul>
+            <li class="fragment"> Servidores </li>
+            <li class="fragment"> Contenedores </li>
+            <li class="fragment"> Ordenadores corrientes </li>
+          </ul>
         </section>
       </section>
+
+      <section>
+        <section>
+          <h2> Ahora sí, comencemos a ver como se usa </h2>
+          <pre class="fragment">
+            <code data-trim contenteditable>
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update sudo apt-get install ansible
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2> Inventario </h2>
+          <h3> /etc/ansible/hosts </h3>
+          <pre>
+            <code data-trim contenteditable>
+perro.ejemplo.com ansible_ssh_host=192.168.1.34
+gato.ejemplo.com ansible_port=5555 ansible_host=192.168.1.43
+
+[servidores]
+xenial.primero.com
+wily.segundo.com
+
+[bbdd]
+replica[0:3].cuarto.com
+
+[local]
+servidores bbdd
+
+[servidores:vars]
+ansible_ssh_user: "ralf"
+ansible_ssh_pass: "guantes" # NO RECOMENDABLE
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2> Módulos </h2>
+          <h3> complementos para realizar tareas simples</h3>
+          <a href="http://docs.ansible.com/ansible/list_of_all_modules.html"> Listado completo </a>
+        </section>
+        <section>
+          <h2> Sistema </h2>
+          <ul>
+            <li>command</li>
+            <li>cron</li>
+            <li>mount</li>
+            <li>ping</li>
+            <li>script</li>
+            <li>shell</li>
+            <li>service</li>
+          </ul>
+        </section>
+        <section>
+          <h2> Instalación </h2>
+          <ul>
+            <li> package </li>
+            <ul>
+              <li> apt </li>
+              <li> pacman </li>
+              <li> yum </li>
+            </ul>
+            <li> easy_install </li>
+          </ul>
+        </section>
+        <section>
+          <h2> Archivos </h2>
+          <ul>
+            <li> copy </li>
+            <li> file </li>
+            <li> find </li>
+            <li> replace </li>
+          </ul>
+        </section>
+        <section>
+          <h2> Infraestructura </h2>
+          <ul>
+            <li> git </li>
+            <li> azure </li>
+            <li> django_manage </li>
+            <li> docker / docker_image </li>
+            <li> lxc_container </li>
+          </ul>
+        </section>
+        <section>
+          <h2> Bases de datos </h2>
+          <ul>
+            <li> MongoDB </li>
+            <li> MySQL </li>
+            <li> Postgres </li>
+            <li> Redis </li>
+          </ul>
+        </section>
+        <section>
+          <h2> Vamos a jugar a juego </h2>
+          <h3> Usando "playbooks" </h3>
+          <pre>
+            <code data-trim contenteditable>
+---
+- hosts: servidores
+  sudo: yes
+  tasks:
+    - name: Actualizar lista de paquetes
+      apt: update_cache=yes
+    - name: Instalar Git
+      apt: name=git state=present
+            </code>
+          </pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <img alt="image" src="images/willy_wonka.png" height="100%" />
+        </section>
+        <section>
+          <h2> Ejemplo en Azure </h2>
+          <p> Provisionamiento en (casi) 5 pasos </p>
+        </section>
+        <section>
+          <h3> Paso 1: Copiar clave privada al servidor </h3>
+            <pre>
+              <code data-trim contenteditable>
+ssh-copy-id -i ~/.ssh/id_rsa.pub germaaan@ansibleando.cloudapp.net
+          </code>
+        </pre>
+        </section>
+        <section>
+          <h3> Paso 2: Crear archivo de inventario </h3>
+            <pre>
+              <code data-trim contenteditable>
+# sudo nano /etc/ansible/hosts
+
+[azure]
+ansibleando.cloudapp.net
+          </code>
+        </pre>
+        </section>
+        <section>
+          <h3> Paso 3: Exportar variable de entorno con la ruta del archivo de inventario </h3>
+            <pre>
+              <code data-trim contenteditable>
+export ANSIBLE_HOSTS=/etc/ansible/hosts
+          </code>
+        </pre>
+        </section>
+        <section>
+          <h3> Paso 4: Probar conexión con ping </h3>
+            <pre>
+              <code data-trim contenteditable>
+ansible azure -u germaaan -m ping
+          </code>
+        </pre>
+        <img alt="image" src="images/ping.png" height="100%" />
+        </section>
+        <section>
+          <h3> Opcional: Ejecutar algo remotamente </h3>
+            <pre>
+              <code data-trim contenteditable>
+ansible azure -m shell -a 'uname -a'
+          </code>
+        </pre>
+        <img alt="image" src="images/shell.png" height="100%" />
+        </section>
+        <section>
+          <h3> Paso 5: Crear la jugada </h3>
+            <pre>
+              <code data-trim contenteditable>
+---
+- hosts: azure
+  remote_user: germaaan
+  tasks:
+    - name: Descargar script instalación Node
+      get_url: url=https://deb.nodesource.com/setup_4.x dest=./setup_4.x mode=0550
+    - name: Ejecutar script de instalación de Node
+      command: ./setup_4.x
+    - name: Instalar Node
+      apt: name=nodejs state=present
+    - name: Instalar Git
+      apt: name=git state=present
+    - name: Comprobar instalación
+      command: node -v
+    - name: Instalar Forever
+      command: npm install -g forever
+    - name: Descagar repositorio aplicación prueba
+      git: repo=https://github.com/heroku/node-js-sample.git dest=./node-js-sample
+    - name: Instalar dependencias de la aplicación
+      command: chdir=node-js-sample npm install
+    - name: Arrancando la aplicación
+      command: chdir=node-js-sample forever start ./index.js
+          </code>
+        </pre>
+        </section>
+        <section>
+          <h3> Paso 5b (FINAL): Hacer la jugada </h3>
+            <pre>
+              <code data-trim contenteditable>
+ansible-playbook -become azure.yml
+          </code>
+        </pre>
+        <img alt="image" src="images/playbook.png" height="100%" />
+        </section>
+        <section>
+          <h3> FUNCIONA! </h3>
+        <img alt="image" src="images/helloworld.png" height="100%" />
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2> Me has convencido, ¿dónde más puedo usarlo? </h2>
+        </section>
+        <section>
+          <h2> Vagrant </h2>
+          <pre>
+            <code data-trim contenteditable>
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu"
+  config.vm.network :private_network, ip: "192.168.2.50"
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+  end
+
+end
+        </code>
+      </pre>
+        </section>
+        <section>
+          <h2> Otras plataformas: </h2>
+          <ul>
+            <li> <a href="http://www.ansible.com/docker"> Docker </a> </li>
+            <li> <a href="http://www.ansible.com/openstack"> OpenStack </a> </li>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2> Gracias por venir ¿Preguntas? </h2>
+          <img alt="image" src="images/doge.png" height="100%" />
+        </section>
+      <section>
 
     </div>
 
