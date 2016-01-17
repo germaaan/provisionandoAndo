@@ -1,0 +1,22 @@
+---
+- hosts: azure
+  remote_user: germaaan
+  tasks:
+    - name: Descargar script instalación Node
+      get_url: url=https://deb.nodesource.com/setup_4.x dest=./setup_4.x mode=0550
+    - name: Ejecutar script de instalación de Node
+      command: ./setup_4.x
+    - name: Instalar Node
+      apt: name=nodejs state=present
+    - name: Instalar Git
+      apt: name=git state=present
+    - name: Comprobar instalación
+      command: node -v
+    - name: Instalar Forever
+      command: npm install -g forever
+    - name: Descargar repositorio aplicación prueba
+      git: repo=https://github.com/heroku/node-js-sample.git dest=./node-js-sample
+    - name: Instalar dependencias de la aplicación
+      command: chdir=node-js-sample npm install
+    - name: Arrancando la aplicación
+      command: chdir=node-js-sample forever start ./index.js
