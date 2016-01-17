@@ -322,7 +322,7 @@ ansible azure -m shell -a 'uname -a'
       command: node -v
     - name: Instalar Forever
       command: npm install -g forever
-    - name: Descagar repositorio aplicación prueba
+    - name: Descargar repositorio aplicación prueba
       git: repo=https://github.com/heroku/node-js-sample.git dest=./node-js-sample
     - name: Instalar dependencias de la aplicación
       command: chdir=node-js-sample npm install
