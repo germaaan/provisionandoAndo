@@ -21,7 +21,7 @@ Germán Martínez Maldonado <br>
 <a href="https://twitter.com/germaaan_">
 @germaaan_ </a>
 <br>
-Oficina de Software Libre de la Universidad de Granada  
+Oficina de Software Libre de la Universidad de Granada  <br> 
 <a href="https://twitter.com/OSLUGR">
 @OSLUGR </a> \
 <a href="https://www.facebook.com/SoftwareLibreUGR">
